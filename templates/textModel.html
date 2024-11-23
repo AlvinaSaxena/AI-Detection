@@ -9,18 +9,26 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/text.css') }}">
 </head>
 <body>
-    <section class = "background" id="home">
+    <section class="background" id="home">
         <div class="logo">
             <img src="{{ url_for('static', filename='logo.png') }}" alt="">
         </div>
-    <section class="main">
-        <div class="up">
-            <h3 style="color: white;">Check if your text is AI Generated or not</h3>
-        </div>
-        <textarea id="text-input" placeholder="Enter your text here..." rows="8"></textarea>
-        <div class="main_btn">
-            <a href="/checkText/" type="button" class="btn btn">Check Text</a>
-        </div>
+        <section class="main">
+            <div class="up">
+                <h3 style="color: white;">Check if your text is AI Generated or not</h3>
+            </div>
+            <form action="/predictText" method="POST">
+                <textarea id="text-input" name="user_text" placeholder="Enter your text here..." rows="8"></textarea>
+                <div class="main_btn">
+                    <button type="submit" class="btn btn">Check Text</button>
+                </div>
+            </form>
+            {% if result %}
+            <div class="result">
+                <h4 style="color: white;">Result: {{ result }}</h4>
+            </div>
+            {% endif %}
+        </section>
     </section>
 </body>
 </html>
