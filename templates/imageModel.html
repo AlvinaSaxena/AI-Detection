@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detect AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/image.css') }}">
+</head>
+<body>
+    <section class="background" id="home">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="">
+        </div>
+        <div class="up">
+          <h1 style="color:white;">Check if your image is AI Generated or not</h1>
+        </div>
+        <div class="drag-area" id="dragArea">
+          <h3>Drag & Drop Images Here</h3>
+          <p>or Click to upload</p>
+          <input type="file" id="fileInput" hidden multiple>
+        </div>
+        <ul class="file-list" id="fileList"></ul>
+        <div class="main_btn">
+            <a href="/checkImage/" type="button" class="btn btn">Check Image</a>
+        </div>
+
+        <script>
+          const dragArea = document.getElementById("dragArea");
+          const fileInput = document.getElementById("fileInput");
+          const fileList = document.getElementById("fileList");
+      
+          // Open file input when clicking the drag area
+          dragArea.addEventListener("click", () => fileInput.click());
+      
+          // Handle file input change
+          fileInput.addEventListener("change", (event) => {
+            handleFiles(event.target.files);
+          });
+      
+          // Drag over event
+          dragArea.addEventListener("dragover", (event) => {
+            event.preventDefault();
+            dragArea.style.backgroundColor = "#f0f0ff";
+          });
+      
+          // Drag leave event
+          dragArea.addEventListener("dragleave", () => {
+            dragArea.style.backgroundColor = "#fff";
+          });
+      
+          // Drop event
+          dragArea.addEventListener("drop", (event) => {
+            event.preventDefault();
+            dragArea.style.backgroundColor = "#fff";
+            handleFiles(event.dataTransfer.files);
+          });
+      
+          // Function to handle and display files
+          function handleFiles(files) {
+            fileList.innerHTML = ""; // Clear existing files
+            Array.from(files).forEach((file) => {
+              const li = document.createElement("li");
+              li.textContent = file.name;
+              fileList.appendChild(li);
+            });
+          }
+        </script>
+      </section>
+      
+
+</body>
+</html>
+
+{% endblock body %}

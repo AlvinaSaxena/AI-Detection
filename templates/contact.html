@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="p-3 mb-2 text-dark" style="background-image: url('/static/contact.webp'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100%; 
+            height: 1100px;">
+    <div class="container my-4" style="color:white;">
+        <form id="contactForm">
+            <h2 class="text-center">CONTACT US</h2>
+            <div class="mb-3">
+                <h4 style="color: white;"><label for="entername" class="form-label">Name</label></h4>
+                <input type="text" class="form-control" id="entername" required>
+            </div>
+            <div class="mb-3">
+                <h4 style="color: white;"><label for="enteremail" class="form-label">Email address</label></h4>
+                <input type="email" class="form-control" id="enteremail" placeholder="name@example.com" required>
+            </div>
+            <div class="mb-3">
+                <h4 style="color: white;"><label for="entersubject" class="form-label">Subject</label></h4>
+                <textarea class="form-control" id="entersubject" rows="2" required></textarea>
+            </div>
+            <div class="mb-3">
+                <h4 style="color: white;"><label for="entermessage" class="form-label">Your message</label></h4>
+                <textarea class="form-control" id="entermessage" rows="6" required></textarea>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-dark" type="submit">Send</button>
+            </div>
+        </form>
+        <div id="contactMessage" class="mt-3"></div>
+    </div>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function (event) {
+            event.preventDefault(); 
+            document.getElementById("contactMessage").innerHTML = "<div class='alert alert-success'>Thank you for contacting us! We will respond you back before 48hrs.</div>";
+        });
+    </script>
+
+<div class="container marketing">
+
+    <div class="row text-center">
+      
+        <div class="col-lg-4">
+            <img src="{{ url_for('static', filename='call.webp') }}" alt="" class="bd-placeholder-img" width="140" height="140">
+            <h2 class="fw-normal" style="color: white;">Phone</h2>
+            <p>+91-xxxxx-xxxxx<br>Call us anytime and we are here to answer.</p>
+        </div>
+    
+        <div class="col-lg-4">
+        <img src="{{ url_for('static', filename='address.webp') }}" alt="" class="bd-placeholder-img" width="140" height="140">
+            <h2 class="fw-normal" style="color: white;">Address</h2>
+            <p>123 Street,City,Country<br>Visit our company and you will leave with full satisfaction.</p>
+        </div>
+    
+        <div class="col-lg-4">
+        <img src="{{ url_for('static', filename='email.webp') }}" alt="" class="bd-placeholder-img" width="140" height="140">
+        <h2 class="fw-normal" style="color: white;">Email</h2>
+            <p>detectai@gmail.com<br>Drop an email and the response will be on the way.</p>
+        </div>
+
+</div>
+{% endblock body %}

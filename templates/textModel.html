@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detect AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/text.css') }}">
+</head>
+<body>
+    <section class = "background" id="home">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="">
+        </div>
+    <section class="main">
+        <div class="up">
+            <h3 style="color: white;">Check if your text is AI Generated or not</h3>
+        </div>
+        <textarea id="text-input" placeholder="Enter your text here..." rows="8"></textarea>
+        <div class="main_btn">
+            <a href="/checkText/" type="button" class="btn btn">Check Text</a>
+        </div>
+    </section>
+</body>
+</html>
+{% endblock body %}
