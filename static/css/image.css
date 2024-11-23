@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap');
+*{
+    box-sizing:border-box;
+    margin:0%;
+    padding: 0%;
+    text-transform: capitalize;
+}
+body{
+    background-color:#c0dde6;
+    color: black;
+    font-family: "Vollkorn", serif;
+}
+.background{
+    width: 100%;
+    height: 100vh;
+    background-image: url("/static/imageModel.webp");
+    background-repeat: no-repeat;
+    background-size: 1700px 700px;
+    background-position:top;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.logo{
+    font-size: 2em;
+    font-weight: 600;
+    flex: 1;
+    color: #13203d;
+    display: flex;
+    align-items: center;
+}
+.logo img{
+    width: 200px;
+    margin:-4%;
+    margin-top:-4%;
+}
+.navbar{
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    right: 0; 
+}
+.main{
+    display: grid;
+    gap: 20px;
+    width: 90%;
+    padding: 5em 5em 5em 5em;
+    margin: auto; 
+}
+.up {
+    margin-bottom: 20px; /* Add space between the heading and drag area */
+    text-align: center;
+  }
+  
+.center h1{
+    font-size: 2.5em;
+    padding-left: 5em;
+    color: whitesmoke;
+}
+.btn{
+    padding: 12px 15px;
+    font-size: 18px;
+    color:black;
+    letter-spacing: 2px;
+    cursor: pointer;
+    margin-left: 628px;
+    border: 2px solid #efff;
+    transition: all 0.5s ease-out; 
+    background-color:cyan;
+}
+.btn:hover {
+    color: white; 
+    background-color: black; 
+    border-color: cyan; 
+}
+#text-input{
+    width: 30%; /* Adjust the width as needed */
+  height: 400px; /* Adjust the height as needed */
+  position: absolute; /* Position the textbox absolutely */
+  right: 20px; /* Position the textbox 20px from the right edge */
+  top: 50%; /* Center the textbox vertically */
+  transform: translateY(-50%); 
+  margin: 45px 150px;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Ensure the body and html occupy the full viewport height */
+  }
+  
+  .background {
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align:center;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    background-color: #f4f4f9; /* Optional: background color */
+  }
+  
+  .drag-area {
+    border: 2px dashed #6c63ff;
+    border-radius: 10px;
+    padding: 40px;
+    width: 100%;
+    max-width: 500px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  
+  .drag-area:hover {
+    background-color: #f0f0ff;
+  }
+  .drag-area h3 {
+    font-size: 20px;
+    color: #6c63ff;
+  }
+  .drag-area p {
+    color: #555;
+  }
+  .file-list {
+    margin-top: 20px;
+  }
+  .file-list li {
+    list-style: none;
+    margin: 5px 0;
+    background: #eaeaea;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  

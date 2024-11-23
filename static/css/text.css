@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap');
+*{
+    box-sizing:border-box;
+    margin:0%;
+    padding: 0%;
+    text-transform: capitalize;
+}
+body{
+    background-color:#c0dde6;
+    color: black;
+    font-family: "Vollkorn", serif;
+}
+.background{
+    width: 100%;
+    height: 100vh;
+    background-image: url("/static/textModel.jpg");
+    background-repeat: no-repeat;
+    background-size: 1700px 700px;
+    background-position:top;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.main_btn {
+    margin-top: 20px; /* Space above the button */
+  }
+
+.logo{
+    font-size: 2em;
+    font-weight: 600;
+    flex: 1;
+    color: #13203d;
+    display: flex;
+    align-items: center;
+}
+.logo img{
+    width: 200px;
+    margin:-4%;
+    margin-top:-4%;
+}
+.navbar{
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    right: 0; 
+}
+.main{
+    display: grid;
+    gap: 20px;
+    gap: 20px;
+    width: 90%;
+    padding: 5em 5em 5em 5em;
+    margin:auto; 
+}
+.center h1{
+    font-size: 2.5em;
+    padding-left: 5em;
+    color: whitesmoke;
+}
+.btn{
+    padding: 12px 15px;
+    font-size: 18px;
+    color:black;
+    letter-spacing: 2px;
+    cursor: pointer;
+    margin-top: 500px;
+    border: 2px solid #efff;
+    transition: all 0.5s ease-out; 
+    background-color:cyan;
+    white-space: nowrap;
+}
+.btn:hover {
+    color: white; 
+    background-color: black; 
+    border-color: cyan; 
+}
+#text-input{
+    width: 30%; /* Adjust the width as needed */
+  height: 400px; /* Adjust the height as needed */
+  position: absolute; /* Position the textbox absolutely */
+  right: 20px; /* Position the textbox 20px from the right edge */
+  top: 50%; /* Center the textbox vertically */
+  transform: translateY(-50%); 
+  margin: 45px 150px;
+}
+.up{
+    margin-bottom:450px;
+    margin-left:700px;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
