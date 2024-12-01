@@ -19,44 +19,45 @@
         <div class="drag-area" id="dragArea">
           <h3>Drag & Drop Images Here</h3>
           <p>or Click to upload</p>
-          <input type="file" id="fileInput" hidden multiple>
+          <form action="/predictImage" method="POST" enctype="multipart/form-data" id="uploadForm">
+            <input type="file" id="fileInput" name="image" hidden>
+            <ul class="file-list" id="fileList"></ul>
+            <button type="submit" class="btn">Check Image</button>
+          </form>
         </div>
-        <ul class="file-list" id="fileList"></ul>
-        <div class="main_btn">
-            <a href="/checkImage/" type="button" class="btn btn">Check Image</a>
-        </div>
-
+        <div id="result" style="margin-top: 20px; color: white; text-align: center;"></div>
+        
         <script>
           const dragArea = document.getElementById("dragArea");
           const fileInput = document.getElementById("fileInput");
           const fileList = document.getElementById("fileList");
-      
+
           // Open file input when clicking the drag area
           dragArea.addEventListener("click", () => fileInput.click());
-      
+
           // Handle file input change
           fileInput.addEventListener("change", (event) => {
             handleFiles(event.target.files);
           });
-      
+
           // Drag over event
           dragArea.addEventListener("dragover", (event) => {
             event.preventDefault();
             dragArea.style.backgroundColor = "#f0f0ff";
           });
-      
+
           // Drag leave event
           dragArea.addEventListener("dragleave", () => {
             dragArea.style.backgroundColor = "#fff";
           });
-      
+
           // Drop event
           dragArea.addEventListener("drop", (event) => {
             event.preventDefault();
             dragArea.style.backgroundColor = "#fff";
             handleFiles(event.dataTransfer.files);
           });
-      
+
           // Function to handle and display files
           function handleFiles(files) {
             fileList.innerHTML = ""; // Clear existing files
@@ -65,12 +66,10 @@
               li.textContent = file.name;
               fileList.appendChild(li);
             });
+            fileInput.files = files; // Assign files to the input element
           }
         </script>
       </section>
-      
-
 </body>
 </html>
-
 {% endblock body %}
