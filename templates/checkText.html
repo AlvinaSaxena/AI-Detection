@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            background-image: url("/static/textPrediction.webp");
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: #333;
+            text-align: center;
+            animation: moveBackground 20s infinite ease-in-out;
+        }
+
+        /* Animation keyframes */
+        @keyframes moveBackground {
+            0% {
+                background-position: 0% 0%;
+                transform: scale(1);
+            }
+            50% {
+                background-position: 70% 70%;
+                transform: scale(1);
+            }
+            100% {
+                background-position: 0% 0%;
+                transform: scale(1);
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 200px auto;
+            padding: 20px;
+            background: black;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            resize: none;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: cyan;
+        }
+
+        .slider {
+            width: 100%; /* Full width */
+            height: 8px; /* Height of the track */
+            border-radius: 5px; /* Rounded corners */
+            background: #ddd; /* Default track color */
+            outline: none; /* Remove outline */
+            transition: background 0.3s ease; /* Smooth color transition */
+        }
+
+        /* Track styling */
+        .slider::-webkit-slider-runnable-track {
+            height: 8px; /* Track height */
+            background: linear-gradient(to right, yellow, #f44336); /* Gradient for the track */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        .value-display {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 5px;
+            color: white;
+        }
+
+        .result-container {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+            border-radius: 5px;
+            color: #4caf50;
+            font-size: 1.2em;
+        }
+
+        .text-container {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5e8e8;
+            border: 1px solid red;
+            border-radius: 5px;
+            color: red;
+            font-size: 1.2em;
+        }
+
+        .slider-label {
+            color: white 
+        }     
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Detection Result</h1>
+        <form action="/predictText/" method="POST">
+    
+
+        <!-- Confidence Threshold Slider -->
+        <div class="slider-container">
+            <label class="slider-label" for="confidence_threshold">Confidence Threshold:</label>
+            <input type="range" id="confidence_threshold" name="confidence_threshold" min="0" max="100" value="{{ confidence|default(50) }}" class="slider" 
+            oninput="updateValue('confidence_value', this.value)">
+            <div class="value-display" id="confidence_value">{{ '%.2f'|format(confidence|default(50.00)) }}</div>
+        </div>
+
+        <!-- Result Display -->
+        {% if result %}
+        <div class="result-container" id="result-container">
+            <strong>Prediction:</strong> {{ result }}
+        </div>
+
+        {% if text %}
+            <div class="text-container" id="text-container">
+                <strong>Your Input:</strong> {{ text }}
+            </div>
+        {% endif %}
+        <script>
+            document.getElementById('confidence_threshold').value = confidence;
+            updateValue('confidence_value', confidence);
+            document.getElementById('result-container').style.display = 'block';
+        </script>
+        {% endif %}
+    </div>
+
+    <script>
+        function updateValue(id, value) {
+            document.getElementById(id).textContent = value;
+        }
+    </script>
+</body>
+</html>
+{% endblock body %}
