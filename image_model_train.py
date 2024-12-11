@@ -95,7 +95,7 @@ def preprocess_image(image_path, processor):
         return inputs
 
 
-def predict_single_image(image_path, model, processor, inputs, class_labels=["FAKE", "REAL"]):
+def predict_single_image(image_path, model, processor, inputs, class_labels=["AI Generated", "REAL"]):
     model.eval()
     with torch.no_grad():
         outputs = model(inputs)

@@ -48,6 +48,7 @@ def checkImage():
 def predictText():
     text = request.form.get('user_text')
     prediction, confidence = predict_text(text, tokenizer, text_model)
+    confidence = confidence*100
     result= f"This text is {prediction}"
     return render_template('checkText.html', result=result, confidence=confidence, prediction=prediction, text=text)
 
@@ -69,6 +70,7 @@ def predictImage():
             processor,
             inputs
         )
+        confidence = confidence*100
         result=f"The given image is {predicted_label}"
     except Exception as e:
         return str(e)
