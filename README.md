@@ -1,6 +1,6 @@
-# AI Detection System
+# AI Detection System (Detect AI)
 
-A Flask-based web application that detects whether text or images are AI-generated using fine-tuned BERT and ViT models.
+A Flask-based web application that detects whether text or images are AI-generated using pre-trained BERT and ViT models.
 
 ## 🔍 Features
 
@@ -42,8 +42,8 @@ flowchart TD
     end
 
     subgraph Models
-        I[(Fine-tuned BERT)]
-        J[(Fine-tuned ViT)]
+        I[(text_model/)]
+        J[(image_model/)]
         E -->|Load Model| I
         G -->|Load Model| J
     end
@@ -58,15 +58,14 @@ flowchart TD
 - TensorFlow
 - Flask
 - Transformers library
-- KaggleHub
 - PIL (Python Imaging Library)
 
 ## 🚀 Installation
 
 1. Clone the repository:
 ```bash
-git clone [your-repo-url]
-cd [your-repo-name]
+git clone https://github.com/yadavadarsh55/AI-Detection.git
+cd AI-Detection
 ```
 
 2. Create and activate a virtual environment:
@@ -77,34 +76,33 @@ source venv/bin/activate  # On Windows use: venv\Scripts\activate
 
 3. Install required packages:
 ```bash
-pip install flask transformers tensorflow torch pillow kagglehub
+pip install -r requirements.txt
 ```
 
-4. Set up the project structure:
+4. Project structure:
 ```
-project_root/
+AI-Detection/
 ├── app.py
 ├── text_model_train.py
 ├── image_model_train.py
-├── templates/
-│   ├── home.html
-│   ├── about.html
-│   ├── contact.html
-│   ├── textModel.html
-│   ├── imageModel.html
-│   ├── checkText.html
-│   └── checkImage.html
-├── text_model/
-└── image_model/
+├── requirements.txt
+├── text_model/          # Pre-trained BERT model folder
+├── image_model/         # Pre-trained ViT model folder
+└── templates/
+    ├── home.html
+    ├── about.html
+    ├── contact.html
+    ├── textModel.html
+    ├── imageModel.html
+    ├── checkText.html
+    └── checkImage.html
 ```
 
 ## 🏃‍♂️ Running the Application
 
-1. Train the models (optional - skip if using pre-trained models):
-```bash
-python text_model_train.py
-python image_model_train.py
-```
+1. Ensure model folders are present:
+   - `text_model/` directory containing the BERT model files
+   - `image_model/` directory containing the ViT model files
 
 2. Start the Flask server:
 ```bash
@@ -116,6 +114,7 @@ Open your web browser and navigate to `http://localhost:8000`
 
 ## 🔄 API Endpoints
 
+### Web Interface Endpoints
 - `/`: Home page
 - `/about/`: About page
 - `/contact/`: Contact page
@@ -123,22 +122,59 @@ Open your web browser and navigate to `http://localhost:8000`
 - `/imageModel/`: Image analysis interface
 - `/checkText/`: Text checking form
 - `/checkImage/`: Image checking form
-- `/predictText/`: Text prediction endpoint (POST)
-- `/predictImage/`: Image prediction endpoint (POST)
 
-## 📊 Model Details
+### Prediction Endpoints
+- `/predictText/`: Text prediction endpoint (POST)
+  - Input: Form data with 'user_text' field
+  - Output: Prediction (AI-generated/Human-written) with confidence score
+
+- `/predictImage/`: Image prediction endpoint (POST)
+  - Input: Form data with 'image' file
+  - Output: Prediction (FAKE/REAL) with confidence score
+
+## 📊 Models
 
 ### Text Model (BERT)
-- Base model: bert-base-uncased
-- Fine-tuned on custom dataset
+- Located in `text_model/` directory
 - Binary classification (AI-generated vs Human-written)
-- Returns confidence scores with predictions
+- Uses BERT tokenizer for text preprocessing
+- Returns prediction with confidence percentage
 
 ### Image Model (ViT)
-- Base model: facebook/deit-tiny-patch16-224
-- Fine-tuned on AI-generated vs real images dataset
+- Located in `image_model/` directory
 - Binary classification (FAKE vs REAL)
-- Includes preprocessing for various image formats
+- Uses ViT processor for image preprocessing
+- Supports common image formats (JPEG, PNG)
+- Returns prediction with confidence percentage
+
+## 💻 Usage Examples
+
+### Text Analysis
+```python
+from text_model_train import predict_text
+from transformers import BertTokenizer, TFBertForSequenceClassification
+
+text_model = TFBertForSequenceClassification.from_pretrained("./text_model")
+tokenizer = BertTokenizer.from_pretrained("./text_model")
+
+text = "Your text to analyze"
+prediction, confidence = predict_text(text, tokenizer, text_model)
+print(f"Prediction: {prediction}, Confidence: {confidence:.2f}%")
+```
+
+### Image Analysis
+```python
+from image_model_train import predict_single_image, preprocess_image
+from transformers import ViTForImageClassification, ViTImageProcessor
+
+image_model = ViTForImageClassification.from_pretrained("./image_model")
+processor = ViTImageProcessor.from_pretrained("./image_model")
+
+image_path = "path_to_your_image.jpg"
+inputs = preprocess_image(image_path, processor)
+prediction, confidence = predict_single_image(image_path, image_model, processor, inputs)
+print(f"Prediction: {prediction}, Confidence: {confidence:.2f}")
+```
 
 ## 🤝 Contributing
 
@@ -150,15 +186,16 @@ Open your web browser and navigate to `http://localhost:8000`
 
 ## ⚖️ License
 
-[Add your license information here]
+MIT License
 
 ## 📧 Contact
 
-[Add your contact information here]
+- GitHub: [@yadavadarsh55](https://github.com/yadavadarsh55)
+- Project Link: [https://github.com/yadavadarsh55/AI-Detection](https://github.com/yadavadarsh55/AI-Detection)
 
 ## 🙏 Acknowledgments
 
-- BERT model from Hugging Face
-- ViT implementation from Facebook Research
-- Flask web framework
 - Transformers library from Hugging Face
+- Flask web framework
+- PyTorch and TensorFlow frameworks
+- Dataset from Kaggle for model training
